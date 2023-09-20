@@ -31,7 +31,7 @@ export const TodoItem = ({
       <div key={todo.id} className="todoItem">
         {!todo.editing ? (
           <>
-            <label>
+            <label style={todo.completed ? {textDecoration:"line-through"} : {textDecoration:"none"} }>
               <input
                 type="checkbox"
                 className="todoCheckbox"

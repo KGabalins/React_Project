@@ -18,6 +18,7 @@ export const Profile = () => {
 
     try {
       updateUserEmail(emailFormAttributes);
+      setErrorMsg(" - Email updated successfully!");
       setEmailFormAttributes({
         newEmail: "",
         confirmNewEmail: "",
