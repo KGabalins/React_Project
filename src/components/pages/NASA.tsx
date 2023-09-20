@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import "./styles/Nasa.css";
-import { NasaData, NasaItem } from "./items/NasaItem";
+import "../styles/Nasa.css";
+import { NasaData, NasaItem } from "../items/NasaItem";
 
 const API_KEY = `1NfgHN3IybfUE0SM1NbaGjNYFgvuyn8LfbGYoYBD`;
 

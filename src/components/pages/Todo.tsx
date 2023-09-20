@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import { TodoList } from "./lists/TodoList";
-import { TodoForm } from "./forms/TodoForm";
-import { UserContext } from "./context/UserContext";
-import { TodoType } from "./items/TodoItem";
-import "./styles/Todo.css"
+import { TodoList } from "../lists/TodoList";
+import { TodoForm } from "../forms/TodoForm";
+import { UserContext } from "../context/UserContext";
+import { TodoType } from "../items/TodoItem";
+import "../styles/Todo.css"
 
 export const Todo = () => {
   const { currentUser, updateTodos } = useContext(UserContext);

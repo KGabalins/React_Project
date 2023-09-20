@@ -1,16 +1,16 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
+import { Login } from "./components/pages/Login";
+import { Register } from "./components/pages/Register";
 import "./components/styles/Main.css";
-import { Home } from "./components/Home";
+import { Home } from "./components/pages/Home";
 import { Navbar } from "./components/layouts/Navbar";
-import { Todo } from "./components/Todo";
+import { Todo } from "./components/pages/Todo";
 import { UserContextProvider } from "./components/context/UserContextProvider";
 import { ProtectedRoute } from "./components/routes/ProtectedRoute";
 import { GuestRoute } from "./components/routes/GuestRoutes";
-import { Shop } from "./components/Shop";
-import { Profile } from "./components/Profile";
-import { NASA } from "./components/NASA";
+import { Shop } from "./components/pages/Shop";
+import { Profile } from "./components/pages/Profile";
+import { NASA } from "./components/pages/NASA";
 
 function App() {
   return (
