@@ -1,0 +1,17 @@
+.todoForm {
+  display: flex;
+  column-gap: 5px;
+}
+
+.todoList {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 5px;
+}
+
+.todoItem {
+  display: flex;
+  column-gap: 5px;
+}

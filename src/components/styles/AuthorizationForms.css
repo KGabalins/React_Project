@@ -1,0 +1,56 @@
+.authorizationDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.form-primary span {
+  text-align: center;
+  margin: 10px 0px;
+}
+
+.form-primary input {
+  border: 1px solid;
+  height: 25px;
+}
+
+.form-primary button {
+  height: 40px;
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+
+.form-primary {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border: 1px solid;
+  border-radius: 15px;
+  padding: 10px;
+  row-gap: 10px;
+
+  color: var(--first);
+  background-color: var(--fourth);
+  border-color: var(--fifth);
+}
+
+.form-primary input {
+  background-color: var(--first);
+  border-color: var(--fifth);
+  color: var(--fifth);
+}
+
+.form-primary button {
+  background-color: var(--first);
+  border-color: var(--fifth);
+  color: var(--fifth);
+}
+
+.form-primary button:hover {
+  background-color: var(--second);
+}
+.form-primary button:active {
+  background-color: var(--third);
+}

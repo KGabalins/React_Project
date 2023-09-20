@@ -1,0 +1,8 @@
+.nasaDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.nasaDiv img {
+  height: 400px;
+}
