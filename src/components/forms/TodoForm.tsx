@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { TodoType } from "../items/TodoItem";
 
-type TodoFormProps = {
-  addTodo: (title: string) => void;
-};
-
-export const TodoForm = ({ addTodo }: TodoFormProps) => {
+export const TodoForm = () => {
+  const { addTodo } = useContext(UserContext);
   const [newTodo, setNewTodo] = useState("");
+
+  console.log("form rendered");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!newTodo) return;
 
-    addTodo(newTodo);
+    handleAddTodo(newTodo);
 
     setNewTodo("");
+  };
+
+  const handleAddTodo = (title: string) => {
+    const newTodo: TodoType = {
+      id: crypto.randomUUID(),
+      title,
+      completed: false,
+      editing: false,
+    };
+
+    addTodo(newTodo);
   };
 
   return (

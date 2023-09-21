@@ -5,10 +5,8 @@ type PopupProps = {
   children: React.ReactNode;
 };
 
-export const Popup = (props: PopupProps) => {
+const Popup = (props: PopupProps) => {
   const { id, title, children, btnText } = props;
-
-  // const displayButton = document.getElementById(`displayBtnDiv-${id}`);
 
   const changePopupState = () => {
     const popup = document.getElementById(`popup-${id}`);
@@ -41,3 +39,5 @@ export const Popup = (props: PopupProps) => {
     </>
   );
 };
+
+export default Popup;

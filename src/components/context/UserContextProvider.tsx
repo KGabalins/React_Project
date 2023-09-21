@@ -33,7 +33,7 @@ export const UserContextProvider = () => {
     userDatabase.map((user) => {
       if (user.email === email && user.password === password) {
         setCurrentUser(user);
-        localStorage.setItem("USER", JSON.stringify(user));
+        updateLocalUser(user);
         navigate("/");
       }
 
@@ -83,32 +83,88 @@ export const UserContextProvider = () => {
     };
 
     setUserDatabase((prevState) => {
-      const newDatabase = [...prevState, newUser];
-      localStorage.setItem("USER_DB", JSON.stringify(newDatabase));
+      const updatedDatabase = [...prevState, newUser];
+      updateLocalUserDatabase(updatedDatabase);
 
-      return newDatabase;
+      return updatedDatabase;
     });
 
     setCurrentUser(newUser);
-    localStorage.setItem("USER", JSON.stringify(newUser));
+    updateLocalUser(newUser);
   };
 
   const updateTodos = (todoList: TodoType[]) => {
     setCurrentUser((prevUser) => {
       if (prevUser) {
-        const updatedUser = { ...prevUser, todoList };
-        localStorage.setItem("USER", JSON.stringify(updatedUser));
+        const updatedUser: UserType = { ...prevUser, todoList };
+        updateLocalUser(updatedUser);
 
         setUserDatabase((prevDatabase) => {
-          const newDatabase = prevDatabase.map((user) => {
+          const updatedDatabase = prevDatabase.map((user) => {
             if (user.id === prevUser.id) return updatedUser;
 
             return user;
           });
 
-          localStorage.setItem("USER_DB", JSON.stringify(newDatabase));
+          updateLocalUserDatabase(updatedDatabase);
 
-          return newDatabase;
+          return updatedDatabase;
+        });
+
+        return updatedUser;
+      }
+
+      return prevUser;
+    });
+  };
+
+  const addTodo = (todo: TodoType) => {
+    setCurrentUser((prevUser) => {
+      if (prevUser) {
+        const updatedUser: UserType = {
+          ...prevUser,
+          todoList: [...prevUser.todoList, todo],
+        };
+        updateLocalUser(updatedUser);
+
+        setUserDatabase((prevDatabase) => {
+          const updatedDatabase = prevDatabase.map((user) => {
+            if (user.id === prevUser.id) return updatedUser;
+
+            return user;
+          });
+
+          updateLocalUserDatabase(updatedDatabase);
+
+          return updatedDatabase;
+        });
+
+        return updatedUser;
+      }
+
+      return prevUser;
+    });
+  };
+
+  const updateUserName = (name: string) => {
+    if (!name) throw new Error("All input fields must be filled out!");
+
+    setCurrentUser((prevUser) => {
+      if (prevUser) {
+        const updatedUser = { ...prevUser, name };
+
+        updateLocalUser(updatedUser);
+
+        setUserDatabase((prevDatabase) => {
+          const updatedDatabase = prevDatabase.map((user) => {
+            if (user.id === updatedUser.id) return updatedUser;
+
+            return user;
+          });
+
+          updateLocalUserDatabase(updatedDatabase);
+
+          return updatedDatabase;
         });
 
         return updatedUser;
@@ -126,11 +182,9 @@ export const UserContextProvider = () => {
     if (!newEmail || !confirmNewEmail || !password)
       throw new Error("All input fields must be filled out!");
 
-    if (password !== currentUser?.password)
-      throw new Error("Wrong password!");
+    if (password !== currentUser?.password) throw new Error("Wrong password!");
 
-    if (newEmail !== confirmNewEmail)
-      throw new Error("Emails do not match!");
+    if (newEmail !== confirmNewEmail) throw new Error("Emails do not match!");
 
     if (newEmail === currentUser?.email)
       throw new Error("You already have this email!");
@@ -147,24 +201,32 @@ export const UserContextProvider = () => {
         const updatedUser = { ...prevUser, email: newEmail };
 
         setUserDatabase((prevDatabase) => {
-          const newDatabase = prevDatabase.map((user) => {
+          const updatedDatabase = prevDatabase.map((user) => {
             if (user.id === updatedUser.id) return updatedUser;
 
             return user;
           });
 
-          localStorage.setItem("USER_DB", JSON.stringify(newDatabase));
+          updateLocalUserDatabase(updatedDatabase);
 
-          return newDatabase;
+          return updatedDatabase;
         });
 
-        localStorage.setItem("USER", JSON.stringify(updatedUser));
+        updateLocalUser(updatedUser);
 
         return updatedUser;
       }
 
       return prevUser;
     });
+  };
+
+  const updateLocalUser = (updatedUser: UserType) => {
+    localStorage.setItem("USER", JSON.stringify(updatedUser));
+  };
+
+  const updateLocalUserDatabase = (updatedDatabase: UserType[]) => {
+    localStorage.setItem("USER_DB", JSON.stringify(updatedDatabase));
   };
 
   return (
@@ -177,6 +239,8 @@ export const UserContextProvider = () => {
         registerUser,
         updateTodos,
         updateUserEmail,
+        updateUserName,
+        addTodo,
       }}
     >
       <Outlet />

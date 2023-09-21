@@ -26,12 +26,20 @@ export const TodoItem = ({
     if (e.key === "Enter") document.getElementById(`ok-${todo.id}`)?.click();
   };
 
+  console.log("Item rendered");
+
   return (
     <>
       <div key={todo.id} className="todoItem">
         {!todo.editing ? (
           <>
-            <label style={todo.completed ? {textDecoration:"line-through"} : {textDecoration:"none"} }>
+            <label
+              style={
+                todo.completed
+                  ? { textDecoration: "line-through" }
+                  : { textDecoration: "none" }
+              }
+            >
               <input
                 type="checkbox"
                 className="todoCheckbox"

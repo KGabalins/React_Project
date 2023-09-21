@@ -28,6 +28,8 @@ type UserContextType = {
   registerUser: (user: UserCreationType) => void;
   updateTodos: (todoList: TodoType[]) => void;
   updateUserEmail: (userData: UpdateEmailAttributes) => void;
+  updateUserName: (name: string) => void;
+  addTodo: (todo: TodoType) => void;
 };
 
 export const UserContext = createContext({} as UserContextType);
