@@ -2,21 +2,17 @@ import { useState, useEffect } from "react";
 import "../styles/Nasa.css";
 import { NasaData, NasaItem } from "../items/NasaItem";
 
-const API_KEY = `1NfgHN3IybfUE0SM1NbaGjNYFgvuyn8LfbGYoYBD`;
-
-const query = `date=2022-01-01&`;
-
 export const NASA = () => {
   const [nasaData, setNasaData] = useState<NasaData | null>();
   const [url, setUrl] = useState(
-    `https://api.nasa.gov/planetary/apod?${query}api_key=1NfgHN3IybfUE0SM1NbaGjNYFgvuyn8LfbGYoYBD`
+    `https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API_KEY}`
   );
   const [date, setDate] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    setNasaData(null)
-    setErrorMsg("")
+    setNasaData(null);
+    setErrorMsg("");
 
     fetch(url)
       .then((response) => {
@@ -34,14 +30,20 @@ export const NASA = () => {
 
   useEffect(() => {
     setUrl(
-      `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`
+      `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${process.env.REACT_APP_NASA_API_KEY}`
     );
   }, [date]);
 
   return (
     <div className="page">
       <input type="date" onChange={(e) => setDate(e.target.value)} />
-      {nasaData ? <NasaItem nasaData={nasaData}/> : errorMsg ? <p>{errorMsg}</p> : <p>...Loading</p>}
+      {nasaData ? (
+        <NasaItem nasaData={nasaData} />
+      ) : errorMsg ? (
+        <p>{errorMsg}</p>
+      ) : (
+        <p>...Loading</p>
+      )}
     </div>
   );
 };
